@@ -15,28 +15,38 @@ use App\Http\Controllers\ProfileController;
 */
 
 
-//  GET
-Route::get('/blog', [PostsController::class, 'index'])
-        ->name('blog.index');
-Route::get('/blog/{id}', [PostsController::class, 'show'])
-        ->name('blog.show');
 
 
-// POST
-Route::get('/blog/create', [PostsController::class, 'create'])
-        ->name('blog.create');
-Route::post('/blog', [PostsController::class, 'store'])
-        ->name('blog.store');
 
-// PUT or PATCH
-Route::get('/blog/edit/{id}', [PostsController::class, 'edit'])
-        ->name('blog.edit');
-Route::patch('/blog/blog/{id}', [PostsController::class, 'update'])
-        ->name('blog.update');
 
-// DELETE
-Route::delete('/blog/{id}', [PostsController::class, 'destroy'])
-        ->name('blog.destroy');
+
+
+
+
+
+Route::prefix('/blog')->group(function () {
+    //  GET
+    Route::get('/', [PostsController::class, 'index'])
+    ->name('blog.index');
+    Route::get('/{id}', [PostsController::class, 'show'])
+    ->name('blog.show');
+
+    // POST
+    Route::get('/create', [PostsController::class, 'create'])
+    ->name('blog.create');
+    Route::post('/', [PostsController::class, 'store'])
+    ->name('blog.store');
+
+    // PUT or PATCH
+    Route::get('/edit/{id}', [PostsController::class, 'edit'])
+    ->name('blog.edit');
+    Route::patch('/{id}', [PostsController::class, 'update'])
+    ->name('blog.update');
+
+    // DELETE
+    Route::delete('/{id}', [PostsController::class, 'destroy'])
+    ->name('blog.destroy');
+});
 
 // Route::resource('blog', PostsController::class);
 
