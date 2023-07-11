@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FallbackController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostsController;
@@ -59,6 +60,9 @@ Route::get('/', HomeController::class);
 
 //  Return view
 // Route::view('/blog', 'blog.index', ['name' => 'Code with Dary']);
+
+// Fallback Route
+Route::fallback(FallbackController::class);
 
 
 
