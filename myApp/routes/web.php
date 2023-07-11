@@ -6,35 +6,42 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
 
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
+    GET - Request a resource
+    POST - Create a new resource
+    PUT - Update a resource
+    PATCH - Modify a resource
+    DELETE - Delete a resource
+    OPTIONS - Ask the server which vers are allowed
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+//  GET
+Route::get('/blog', [PostsController::class, 'index']);
+Route::get('/blog/1', [PostsController::class, 'show']);
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// POST
+Route::get('/blog/create', [PostsController::class, 'create']);
+Route::post('/blog', [PostsController::class, 'store']);
 
-// Route::get('/blog', [PostsController::class, 'index']);
+// PUT or PATCH
+Route::get('/blog/edit/1', [PostsController::class, 'edit']);
+Route::patch('/blog/blog/1', [PostsController::class, 'update']);
 
-Route::resource('blog', PostsController::class);
+// DELETE
+Route::delete('/blog1', [PostsController::class, 'destroy']);
+
+// Route::resource('blog', PostsController::class);
 
 // Route for invoke method
 Route::get('/', HomeController::class);
+
+// Multiple HTTP verbs
+// Route::match(['GET', 'POST'], 'blog', [PostsController::class, 'index']);
+// Route::any('/blog', [PostsController::class, 'index']);
+
+//  Return view
+// Route::view('/blog', 'blog.index', ['name' => 'Code with Dary']);
+
+
 
 require __DIR__.'/auth.php';
