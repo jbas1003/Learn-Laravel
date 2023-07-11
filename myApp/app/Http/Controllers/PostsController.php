@@ -11,7 +11,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return 'Index of blog Method';
+        return view('blog.index');
     }
 
     /**
